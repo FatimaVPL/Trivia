@@ -16,6 +16,7 @@
 
 package com.example.android.navigation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +37,14 @@ class GameWonFragment : Fragment() {
         binding.nextMatchButton.setOnClickListener{view: View->
             view.findNavController()
                 .navigate(R.id.action_gameWonFragment_to_gameFragment)}
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "Comparte tu logo con tus amigos!")
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
         return binding.root
     }
 }
